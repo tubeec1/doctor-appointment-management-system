@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoute");
+const doctorRoutes = require("./routes/doctorRoute");
 
 const app = express();
 
@@ -28,5 +29,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/doctor", doctorRoutes);
 
 module.exports = app;
