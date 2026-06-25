@@ -6,6 +6,7 @@ const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoute");
 const doctorRoutes = require("./routes/doctorRoute");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/doctor", doctorRoutes);
+app.use("/api/appointments", appointmentRoutes);
 
 module.exports = app;
