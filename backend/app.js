@@ -10,6 +10,9 @@ const appointmentRoutes = require("./routes/appointmentRoutes");
 const scheduleRoutes = require("./routes/scheduleRoutes");
 const departmentRoutes = require("./routes/departmentRoutes");
 const medicalRecordRoutes = require("./routes/medicalRecordRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
+const reportRoutes = require("./routes/reportRoutes");
 
 const app = express();
 
@@ -38,4 +41,7 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/schedules", scheduleRoutes);
 app.use("/api/departments", departmentRoutes);
 app.use("/api/medical-records", medicalRecordRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/reports", reportRoutes);
 module.exports = app;
