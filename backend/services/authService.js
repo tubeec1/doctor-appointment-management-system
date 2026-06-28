@@ -85,39 +85,31 @@ const updateProfileService = async (userId, body, file) => {
 
   await authModel.updateUser({
     userId,
-
     fullName: body.fullName || user.full_name,
-
     gender: body.gender || user.gender,
-
     phone: body.phone || user.phone,
-
     address: body.address || user.address,
-
     nationality: body.nationality || user.nationality,
-
     profileImage,
   });
 
   await authModel.updatePatient({
     userId,
-
     dateOfBirth: body.dateOfBirth || null,
-
     bloodGroup: body.bloodGroup || null,
-
     weight: body.weight || null,
-
     height: body.height || null,
-
     emergencyContact: body.emergencyContact || null,
-
     medicalHistory: body.medicalHistory || null,
   });
+
+  // Fetch updated user
+  const updatedUser = await authModel.findUserFullDetailsByEmail(user.email);
 
   return {
     success: true,
     message: "Profile updated successfully",
+    user: updatedUser,
   };
 };
 
