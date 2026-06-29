@@ -2,15 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import authReducer from "../features/auth/authSlice";
 
-import departmentReducer from "../features/department/departmentSlice";
-import doctorReducer from "../features/doctor/doctorSlice";
-import patientReducer from "../features/patient/patientSlice";
-import scheduleReducer from "../features/schedule/scheduleSlice";
-import appointmentReducer from "../features/appointment/appointmentSlice";
-import medicalRecordReducer from "../features/medicalRecord/medicalRecordSlice";
-import paymentReducer from "../features/payment/paymentSlice";
+import departmentReducer from "../features/departments/departmentSlice";
+import doctorReducer from "../features/doctors/doctorSlice";
+import scheduleReducer from "../features/schedules/scheduleSlice";
+import appointmentReducer from "../features/appointments/appointmentSlice";
+import medicalRecordReducer from "../features/medicalRecords/medicalRecordSlice";
+import paymentReducer from "../features/payments/paymentSlice";
 import dashboardReducer from "../features/dashboard/dashboardSlice";
-import reportReducer from "../features/report/reportSlice";
+import reportReducer from "../features/reports/reportSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,7 +17,6 @@ export const store = configureStore({
 
     department: departmentReducer,
     doctor: doctorReducer,
-    patient: patientReducer,
     schedule: scheduleReducer,
     appointment: appointmentReducer,
     medicalRecord: medicalRecordReducer,

@@ -16,10 +16,8 @@ import { store } from "./app/store";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <Toaster position="top-right" reverseOrder={false} />
-        <App />
-      </BrowserRouter>
+      <Toaster position="top-right" reverseOrder={false} />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

@@ -28,15 +28,13 @@ router.post(
 
 router.get(
   "/",
-  authMiddleware,
-  roleMiddleware("Administrator"),
+
   departmentController.getAllDepartments,
 );
 
 router.get(
   "/:id",
-  authMiddleware,
-  roleMiddleware("Administrator"),
+
   departmentController.getDepartmentById,
 );
 
@@ -69,8 +67,7 @@ router.post(
 
 router.get(
   "/:id/doctors",
-  authMiddleware,
-  roleMiddleware("Administrator"),
+
   departmentController.getDepartmentDoctors,
 );
 

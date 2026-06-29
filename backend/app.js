@@ -17,7 +17,11 @@ const reportRoutes = require("./routes/reportRoutes");
 const app = express();
 
 app.use(cors());
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
+);
 app.use(compression());
 app.use(morgan("dev"));
 
@@ -36,7 +40,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
-app.use("/api/doctor", doctorRoutes);
+app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/schedules", scheduleRoutes);
 app.use("/api/departments", departmentRoutes);

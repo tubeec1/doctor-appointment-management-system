@@ -30,12 +30,12 @@ router.post(
 /* -------------------------------------------------------------------------- */
 /* Get All Doctors                                                            */
 /* -------------------------------------------------------------------------- */
-router.get("/", authMiddleware, doctorController.getAllDoctors);
+router.get("/", doctorController.getAllDoctors);
 
 /* -------------------------------------------------------------------------- */
 /* Get Doctor By Id                                                           */
 /* -------------------------------------------------------------------------- */
-router.get("/:id", authMiddleware, doctorController.getDoctorById);
+router.get("/:id", doctorController.getDoctorById);
 
 /* -------------------------------------------------------------------------- */
 /* Update Doctor                                                              */
