@@ -111,7 +111,8 @@ ORDER BY d.id DESC
 };
 
 const getDoctorById = async (doctorId) => {
-  const [rows] = await pool.query(
+  // Get doctor information
+  const [doctorRows] = await pool.query(
     `
 SELECT
 u.id,
@@ -134,7 +135,11 @@ d.id AS doctor_id,
 d.specialization,
 d.experience_years,
 d.consultation_fee,
-d.bio
+d.bio,
+
+dep.id AS department_id,
+dep.name AS department_name,
+dep.description AS department_description
 
 FROM doctors d
 
@@ -144,13 +149,59 @@ ON d.user_id = u.id
 INNER JOIN roles r
 ON r.id = u.role_id
 
+LEFT JOIN doctor_departments dd
+ON dd.doctor_id = d.id
+
+LEFT JOIN departments dep
+ON dep.id = dd.department_id
+
 WHERE d.id = ?
 AND u.is_active = 1
 `,
     [doctorId],
   );
 
-  return rows[0];
+  if (doctorRows.length === 0) {
+    return null;
+  }
+
+  const doctor = doctorRows[0];
+
+  // Get all schedules for this doctor
+  const [schedules] = await pool.query(
+    `
+SELECT
+id,
+doctor_id,
+day_of_week,
+start_time,
+end_time,
+created_at,
+updated_at
+
+FROM schedules
+
+WHERE doctor_id = ?
+
+ORDER BY
+FIELD(
+  day_of_week,
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday'
+),
+start_time ASC
+`,
+    [doctorId],
+  );
+
+  doctor.schedules = schedules;
+
+  return doctor;
 };
 
 const updateDoctorUser = async (data) => {

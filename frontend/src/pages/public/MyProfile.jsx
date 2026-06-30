@@ -28,7 +28,7 @@ import {
   selectAuthMessage,
 } from "../../features/auth/authSlice";
 
-const Profile = () => {
+const MyProfile = () => {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
 
@@ -458,4 +458,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default MyProfile;

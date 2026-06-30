@@ -10,11 +10,17 @@ import ProtectedRoute from "./ProtectedRoute";
 /* Public */
 import HomePage from "../pages/public/Home";
 import DoctorsPage from "../pages/public/Doctors";
+import DoctorDetails from "../pages/public/DoctorDetails";
 import DepartmentsPage from "../pages/public/Departments";
+import BookAppointment from "../pages/public/BookAppointment";
+import MyAppointments from "../pages/public/MyAppointments";
+import MyProfilePage from "../pages/public/MyProfile";
+import MyMedicalRecords from "../pages/public/MyMedicalRecords";
 import AboutPage from "../pages/public/About";
 import ContactPage from "../pages/public/Contact";
 import LoginPage from "../pages/auth/Login";
 import SignupPage from "../pages/auth/Signup";
+
 import NotFoundPage from "../pages/public/NotFoundPage";
 
 /* Admin */
@@ -37,14 +43,6 @@ import DoctorAppointmentsPage from "../pages/doctor/Appointments";
 import DoctorMedicalRecordsPage from "../pages/doctor/MedicalRecords";
 import DoctorProfilePage from "../pages/doctor/Profile";
 
-/* Patient */
-import PatientDashboardPage from "../pages/patient/Dashboard";
-import PatientBookAppointmentPage from "../pages/patient/BookAppointment";
-import PatientMyAppointmentsPage from "../pages/patient/MyAppointments";
-import PatientMedicalRecordsPage from "../pages/patient/MedicalRecords";
-import PatientPaymentsPage from "../pages/patient/Payments";
-import PatientProfilePage from "../pages/patient/Profile";
-
 const appRoutes = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +50,13 @@ const appRoutes = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "doctors", element: <DoctorsPage /> },
+      { path: "doctor-details/:id", element: <DoctorDetails /> },
+      // ✅ Book Appointment
+      { path: "book-appointment", element: <BookAppointment /> },
+      { path: "book-appointment/:doctorId", element: <BookAppointment /> },
+      { path: "my-appointments", element: <MyAppointments /> },
+      { path: "my-medical-records", element: <MyMedicalRecords /> },
+      { path: "my-profile", element: <MyProfilePage /> },
       { path: "departments", element: <DepartmentsPage /> },
       { path: "about", element: <AboutPage /> },
       { path: "contact", element: <ContactPage /> },
@@ -130,27 +135,6 @@ const appRoutes = createBrowserRouter([
       },
 
       /* ================= PATIENT ================= */
-
-      {
-        path: "patient",
-        children: [
-          { index: true, element: <PatientDashboardPage /> },
-          {
-            path: "book-appointment",
-            element: <PatientBookAppointmentPage />,
-          },
-          {
-            path: "my-appointments",
-            element: <PatientMyAppointmentsPage />,
-          },
-          {
-            path: "medical-records",
-            element: <PatientMedicalRecordsPage />,
-          },
-          { path: "payments", element: <PatientPaymentsPage /> },
-          { path: "profile", element: <PatientProfilePage /> },
-        ],
-      },
     ],
   },
 

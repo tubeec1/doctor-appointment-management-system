@@ -1066,7 +1066,7 @@ const Home = () => {
 
                       <div className="mt-auto pt-6">
                         <Link
-                          to={`/doctor-details/${doctor.id}`}
+                          to={`/doctor-details/${doctor.doctor_id}`}
                           className="flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-700 to-cyan-600 py-3 font-semibold text-white transition hover:shadow-lg"
                         >
                           View Profile

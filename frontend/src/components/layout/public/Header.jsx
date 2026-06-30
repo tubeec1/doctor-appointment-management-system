@@ -16,11 +16,17 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+import { SiGotomeeting } from "react-icons/si";
+import { TbBrandBooking } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
+import { CiMedicalCross } from "react-icons/ci";
+
 import {
   logoutUser,
   selectIsAuthenticated,
   selectUser,
 } from "../../../features/auth/authSlice";
+import Appointments from "../../../pages/admin/Appointments";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -47,9 +53,6 @@ const Header = () => {
 
       case "Doctor":
         return "/dashboard/doctor";
-
-      case "Patient":
-        return "/dashboard/patient";
 
       default:
         return "/";
@@ -586,13 +589,39 @@ display:none;
                       </div>
                     </div>
 
+                    {user?.role_name !== "Patient" && (
+                      <Link
+                        to={getDashboardLink()}
+                        className="dropdown-item"
+                        onClick={() => setProfileOpen(false)}
+                      >
+                        <LayoutDashboard size={18} />
+                        Dashboard
+                      </Link>
+                    )}
                     <Link
-                      to={getDashboardLink()}
+                      to="/book-appointment"
                       className="dropdown-item"
                       onClick={() => setProfileOpen(false)}
                     >
-                      <LayoutDashboard size={18} />
-                      Dashboard
+                      <TbBrandBooking size={18} />
+                      Book Appointment
+                    </Link>
+                    <Link to="/my-appointments" className="dropdown-item">
+                      <SiGotomeeting size={18} /> My Appointments
+                    </Link>
+
+                    <Link
+                      to="/my-medical-records"
+                      className="dropdown-item"
+                      onClick={() => setProfileOpen(false)}
+                    >
+                      <CiMedicalCross size={18} />
+                      My Medical Records
+                    </Link>
+
+                    <Link to="/my-profile" className="dropdown-item">
+                      <CgProfile size={18} /> My Profile
                     </Link>
 
                     <button
