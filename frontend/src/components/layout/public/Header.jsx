@@ -599,26 +599,30 @@ display:none;
                         Dashboard
                       </Link>
                     )}
-                    <Link
-                      to="/book-appointment"
-                      className="dropdown-item"
-                      onClick={() => setProfileOpen(false)}
-                    >
-                      <TbBrandBooking size={18} />
-                      Book Appointment
-                    </Link>
-                    <Link to="/my-appointments" className="dropdown-item">
-                      <SiGotomeeting size={18} /> My Appointments
-                    </Link>
+                    {user?.role_name === "Patient" && (
+                      <>
+                        <Link
+                          to="/book-appointment"
+                          className="dropdown-item"
+                          onClick={() => setProfileOpen(false)}
+                        >
+                          <TbBrandBooking size={18} />
+                          Book Appointment
+                        </Link>
+                        <Link to="/my-appointments" className="dropdown-item">
+                          <SiGotomeeting size={18} /> My Appointments
+                        </Link>
 
-                    <Link
-                      to="/my-medical-records"
-                      className="dropdown-item"
-                      onClick={() => setProfileOpen(false)}
-                    >
-                      <CiMedicalCross size={18} />
-                      My Medical Records
-                    </Link>
+                        <Link
+                          to="/my-medical-records"
+                          className="dropdown-item"
+                          onClick={() => setProfileOpen(false)}
+                        >
+                          <CiMedicalCross size={18} />
+                          My Medical Records
+                        </Link>
+                      </>
+                    )}
 
                     <Link to="/my-profile" className="dropdown-item">
                       <CgProfile size={18} /> My Profile
@@ -760,14 +764,16 @@ display:none;
                     </div>
                   </div>
 
-                  <Link
-                    to={getDashboardLink()}
-                    onClick={() => setMobileOpen(false)}
-                    className="mobile-nav-link"
-                  >
-                    <LayoutDashboard size={18} />
-                    Dashboard
-                  </Link>
+                  {user?.role_name !== "Patient" && (
+                    <Link
+                      to={getDashboardLink()}
+                      onClick={() => setMobileOpen(false)}
+                      className="mobile-nav-link"
+                    >
+                      <LayoutDashboard size={18} />
+                      Dashboard
+                    </Link>
+                  )}
 
                   <button
                     onClick={handleLogout}

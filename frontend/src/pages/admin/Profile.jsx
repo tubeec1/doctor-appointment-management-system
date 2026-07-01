@@ -61,7 +61,7 @@ const Profile = () => {
     dispatch(getProfile());
   }, [dispatch]);
 
-  // Syncing incoming snake_case database object structure with camelCase state hooks safely
+  // Syncing database structure with camelCase state hooks safely
   useEffect(() => {
     if (user) {
       let formattedDob = "";
@@ -150,34 +150,32 @@ const Profile = () => {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-16">
-      <section className="bg-gradient-to-r from-blue-700 via-blue-600 to-cyan-600">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="text-center text-white">
-            <h1 className="text-5xl font-bold">Profile Settings</h1>
-            <p className="mt-4 text-blue-100 text-lg max-w-xl mx-auto">
-              Manage your personal identity details, active contact channels,
-              and medical parameters.
-            </p>
-          </div>
+    <div className="bg-slate-50/50 min-h-screen py-10 antialiased">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        {/* Page Title Header */}
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-950">
+            Account Settings
+          </h1>
+          <p className="text-sm text-slate-500 mt-1">
+            Manage your identity, core profile data, and clinical parameters.
+          </p>
         </div>
-      </section>
 
-      <div className="max-w-5xl mx-auto px-6 -mt-10">
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
           {/* Header Card Profile Summary */}
-          <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8 flex flex-col md:flex-row items-center gap-8">
+          <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-6">
             <div
-              className="relative group cursor-pointer"
+              className="relative group cursor-pointer overflow-hidden rounded-full w-28 h-28 ring-4 ring-slate-100 transition-all hover:ring-slate-200/80"
               onClick={() => fileInputRef.current?.click()}
             >
               <img
                 src={imagePreview || "https://placehold.co/150"}
                 alt="Profile Avatar"
-                className="w-32 h-32 rounded-2xl object-cover ring-4 ring-blue-50 border border-slate-200 transition group-hover:brightness-90"
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 rounded-2xl opacity-0 group-hover:opacity-100 transition text-white">
-                <Camera size={24} />
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 group-hover:opacity-100 transition duration-200 text-white backdrop-blur-[2px]">
+                <Camera size={20} className="stroke-[2.5]" />
               </div>
               <input
                 type="file"
@@ -188,269 +186,273 @@ const Profile = () => {
               />
             </div>
 
-            <div className="text-center md:text-left flex-1 space-y-2">
-              <div className="flex flex-col md:flex-row md:items-center gap-2 justify-center md:justify-start">
-                <h2 className="text-3xl font-bold text-slate-900">
+            <div className="text-center sm:text-left flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3 justify-center sm:justify-start">
+                <h2 className="text-2xl font-semibold tracking-tight text-slate-900">
                   {formData.fullName || "User Account"}
                 </h2>
-                <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-bold rounded-full uppercase tracking-wider mx-auto md:mx-0 w-max">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/60 uppercase tracking-wider mx-auto sm:mx-0 w-max">
                   {user?.role_name || "Patient"}
                 </span>
               </div>
-              <p className="text-gray-500 font-medium flex items-center justify-center md:justify-start gap-2">
-                <Mail size={16} className="text-gray-400" />{" "}
-                {formData.email || "N/A"}
+              <p className="text-sm text-slate-500 mt-1.5 flex items-center justify-center sm:justify-start gap-2">
+                <Mail size={15} className="text-slate-400" />
+                {formData.email || "No email registered"}
               </p>
             </div>
           </div>
 
-          {/* Form Matrix Containers */}
-          <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8 space-y-8">
-            {/* Identity Group */}
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">
-                <User size={18} className="text-blue-600" />
+          {/* Identity & Core Demographics Card */}
+          <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-6 sm:p-8">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-4 mb-6">
+              <User size={18} className="text-blue-600 stroke-[2.5]" />
+              <h3 className="text-base font-semibold text-slate-900">
                 Identity & Core Demographics
               </h3>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Full Name
-                  </label>
-                  <div className="relative">
-                    <User
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      placeholder="Enter your full name"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Full Name
+                </label>
+                <div className="relative">
+                  <User
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Phone Contact
-                  </label>
-                  <div className="relative">
-                    <Phone
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="text"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="Enter mobile phone number"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Phone Contact
+                </label>
+                <div className="relative">
+                  <Phone
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Enter mobile phone number"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Date of Birth
-                  </label>
-                  <div className="relative">
-                    <Calendar
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="date"
-                      name="dateOfBirth"
-                      value={formData.dateOfBirth}
-                      onChange={handleChange}
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Date of Birth
+                </label>
+                <div className="relative">
+                  <Calendar
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Gender Identity
-                  </label>
-                  <div className="relative">
-                    <User
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <select
-                      name="gender"
-                      value={formData.gender}
-                      onChange={handleChange}
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Gender Identity
+                </label>
+                <div className="relative">
+                  <User
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <select
+                    name="gender"
+                    value={formData.gender}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition appearance-none"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Nationality
-                  </label>
-                  <div className="relative">
-                    <Globe
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="text"
-                      name="nationality"
-                      value={formData.nationality}
-                      onChange={handleChange}
-                      placeholder="Country of passport / origin"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Nationality
+                </label>
+                <div className="relative">
+                  <Globe
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="nationality"
+                    value={formData.nationality}
+                    onChange={handleChange}
+                    placeholder="Country of passport / origin"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Emergency Contact Connection
-                  </label>
-                  <div className="relative">
-                    <ShieldAlert
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="text"
-                      name="emergencyContact"
-                      value={formData.emergencyContact}
-                      onChange={handleChange}
-                      placeholder="Name or phone of closest family member"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Emergency Contact Connection
+                </label>
+                <div className="relative">
+                  <ShieldAlert
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="text"
+                    name="emergencyContact"
+                    value={formData.emergencyContact}
+                    onChange={handleChange}
+                    placeholder="Name or phone of closest family member"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Medical Vital Analytics Group */}
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-4 border-b pb-2 flex items-center gap-2">
-                <HeartPulse size={18} className="text-blue-600" />
+          {/* Biometrics & Clinical Parameters Card */}
+          <div className="bg-white rounded-xl border border-slate-200/80 shadow-sm p-6 sm:p-8">
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-4 mb-6">
+              <HeartPulse size={18} className="text-blue-600 stroke-[2.5]" />
+              <h3 className="text-base font-semibold text-slate-900">
                 Biometrics & Clinical Parameters
               </h3>
+            </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Blood Group
-                  </label>
-                  <div className="relative">
-                    <Droplet
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <select
-                      name="bloodGroup"
-                      value={formData.bloodGroup}
-                      onChange={handleChange}
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    >
-                      <option value="">Select Group</option>
-                      <option value="A+">A+</option>
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option>
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option>
-                      <option value="AB-">AB-</option>
-                      <option value="O+">O+</option>
-                      <option value="O-">O-</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Weight (kg)
-                  </label>
-                  <div className="relative">
-                    <Scale
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="number"
-                      step="0.1"
-                      name="weight"
-                      value={formData.weight}
-                      onChange={handleChange}
-                      placeholder="e.g. 72.5"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">
-                    Height (cm)
-                  </label>
-                  <div className="relative">
-                    <Ruler
-                      className="absolute left-4 top-3.5 text-gray-400"
-                      size={18}
-                    />
-                    <input
-                      type="number"
-                      name="height"
-                      value={formData.height}
-                      onChange={handleChange}
-                      placeholder="e.g. 178"
-                      className="w-full border rounded-xl pl-12 pr-4 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <label className="block text-sm font-semibold mb-2 text-slate-700">
-                  Chronic Illnesses & Medical History Record
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Blood Group
                 </label>
-                <textarea
-                  name="medicalHistory"
-                  rows={4}
-                  value={formData.medicalHistory}
-                  onChange={handleChange}
-                  placeholder="Elaborate details regarding historical surgeries, known allergies, or conditions..."
-                  className="w-full border rounded-xl p-4 text-sm resize-none focus:ring-2 focus:ring-blue-500 outline-none transition"
-                />
+                <div className="relative">
+                  <Droplet
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <select
+                    name="bloodGroup"
+                    value={formData.bloodGroup}
+                    onChange={handleChange}
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition appearance-none"
+                  >
+                    <option value="">Select Group</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Weight (kg)
+                </label>
+                <div className="relative">
+                  <Scale
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="number"
+                    step="0.1"
+                    name="weight"
+                    value={formData.weight}
+                    onChange={handleChange}
+                    placeholder="e.g. 72.5"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                  Height (cm)
+                </label>
+                <div className="relative">
+                  <Ruler
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    size={16}
+                  />
+                  <input
+                    type="number"
+                    name="height"
+                    value={formData.height}
+                    onChange={handleChange}
+                    placeholder="e.g. 178"
+                    className="w-full bg-slate-50/50 border border-slate-200 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Form Submit Footer Action */}
-            <div className="flex justify-end pt-4 border-t border-slate-100">
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-              >
-                {loading ? (
-                  <>
-                    <LoaderCircle size={18} className="animate-spin" />
-                    Updating Records...
-                  </>
-                ) : (
-                  <>
-                    <Save size={18} />
-                    Commit Profile Updates
-                  </>
-                )}
-              </button>
+            <div className="mt-5">
+              <label className="block text-xs font-medium text-slate-700 mb-1.5">
+                Chronic Illnesses & Medical History Record
+              </label>
+              <textarea
+                name="medicalHistory"
+                rows={4}
+                value={formData.medicalHistory}
+                onChange={handleChange}
+                placeholder="Elaborate details regarding historical surgeries, known allergies, or conditions..."
+                className="w-full bg-slate-50/50 border border-slate-200 rounded-lg p-3.5 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition resize-none"
+              />
             </div>
+          </div>
+
+          {/* Form Submit Footer Action */}
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              disabled={loading}
+              className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium px-5 py-2.5 rounded-lg shadow-sm hover:shadow active:shadow-sm transition duration-150 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+            >
+              {loading ? (
+                <>
+                  <LoaderCircle
+                    size={16}
+                    className="animate-spin stroke-[2.5]"
+                  />
+                  <span>Updating Records...</span>
+                </>
+              ) : (
+                <>
+                  <Save size={16} className="stroke-[2.5]" />
+                  <span>Save Changes</span>
+                </>
+              )}
+            </button>
           </div>
         </form>
       </div>

@@ -116,17 +116,22 @@ ORDER BY id DESC
 /* Update Schedule                                                            */
 /* -------------------------------------------------------------------------- */
 
+/* -------------------------------------------------------------------------- */
+/* Update Schedule                                                            */
+/* -------------------------------------------------------------------------- */
+
 const updateSchedule = async (id, data) => {
   await pool.query(
     `
     UPDATE schedules
     SET
+      doctor_id=?,
       day_of_week=?,
       start_time=?,
       end_time=?
     WHERE id=?
     `,
-    [data.dayOfWeek, data.startTime, data.endTime, id],
+    [data.doctorId, data.dayOfWeek, data.startTime, data.endTime, id],
   );
 };
 

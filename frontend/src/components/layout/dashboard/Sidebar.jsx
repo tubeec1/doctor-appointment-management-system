@@ -64,11 +64,11 @@ const Sidebar = () => {
         label: "Hospital Departments",
         icon: Building2,
       },
-      {
-        path: "/dashboard/admin/doctor-departments",
-        label: "Staff Allocations",
-        icon: GitMerge,
-      },
+      // {
+      //   path: "/dashboard/admin/doctor-departments",
+      //   label: "Staff Allocations",
+      //   icon: GitMerge,
+      // },
       {
         path: "/dashboard/admin/schedules",
         label: "Shift Schedules",
@@ -84,11 +84,11 @@ const Sidebar = () => {
         label: "Clinical Records",
         icon: Activity,
       },
-      {
-        path: "/dashboard/admin/payments",
-        label: "Financial Ledgers",
-        icon: Receipt,
-      },
+      // {
+      //   path: "/dashboard/admin/payments",
+      //   label: "Financial Ledgers",
+      //   icon: Receipt,
+      // },
       {
         path: "/dashboard/admin/reports",
         label: "Analytics Reports",
