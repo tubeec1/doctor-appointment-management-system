@@ -243,7 +243,7 @@ const Footer = () => {
                 </div>
 
                 <div>
-                  <div className="footer-logo-name">DoctorCare</div>
+                  <div className="footer-logo-name">ALRAHIIM</div>
 
                   <div className="footer-logo-sub">Appointment System</div>
                 </div>
@@ -359,7 +359,7 @@ const Footer = () => {
                   <Phone size={18} />
                 </div>
 
-                <div className="contact-text">+252 61 XXX XXXX</div>
+                <div className="contact-text">+252 615 558 699</div>
               </div>
 
               <div className="contact-item">

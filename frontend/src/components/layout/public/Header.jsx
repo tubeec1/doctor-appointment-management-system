@@ -480,7 +480,7 @@ display:none;
             </div>
 
             <div>
-              <div className="logo-name">DoctorCare</div>
+              <div className="logo-name">ALRAHIIM</div>
               <div className="logo-sub">Healthcare System</div>
             </div>
           </Link>
